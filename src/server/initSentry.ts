@@ -7,7 +7,6 @@ export const initSentry = (
   additionalOptions?: Partial<Options>
 ) => {
   const sentry = new Toucan({
-    request,
     requestDataOptions: {
       allowedHeaders: [
         'user-agent',
