@@ -1,18 +1,17 @@
 {
-  "name": "@jill64/sentry-sveltekit-cloudflare",
+  "name": "sentry-sveltekit-cloudflare-capture",
   "version": "2.0.6",
-  "description": "♟️ Unofficial Sentry Integration for SvelteKit Cloudflare Adapter",
+  "description": "♟️ Unofficial Sentry Integration for SvelteKit Cloudflare Adapter - with manual event capture. Fork from @jill64/sentry-sveltekit-cloudflare",
   "type": "module",
   "main": "dist/index.js",
   "license": "MIT",
   "author": {
-    "name": "jill64",
-    "email": "contact@jill64.dev",
-    "url": "https://github.com/jill64",
+    "name": "tarekfb",
+    "url": "https://github.com/tarekfb",
     "image": "https://avatars.githubusercontent.com/u/143883742?v=4"
   },
-  "bugs": "https://github.com/jill64/sentry-sveltekit-cloudflare/issues",
-  "homepage": "https://github.com/jill64/sentry-sveltekit-cloudflare#readme",
+  "bugs": "https://github.com/tarekfb/sentry-sveltekit-cloudflare-capture/issues",
+  "homepage": "https://github.com/tarekfb/sentry-sveltekit-cloudflare-capture#readme",
   "files": [
     "dist"
   ],
@@ -26,8 +25,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jill64/sentry-sveltekit-cloudflare.git",
-    "image": "https://opengraph.githubassets.com/5ca95591e288a72d828ff823cf16cab5ca4656bcf756b46f32f90433c7eda0c8/jill64/sentry-sveltekit-cloudflare"
+    "url": "git+https://github.com/tarekfb/sentry-sveltekit-cloudflare-capture.git",
+    "image": "https://opengraph.githubassets.com/5ca95591e288a72d828ff823cf16cab5ca4656bcf756b46f32f90433c7eda0c8/tarekfb/sentry-sveltekit-cloudflare-capture"
   },
   "exports": {
     "./client": {
