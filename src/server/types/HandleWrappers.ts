@@ -5,5 +5,5 @@ import { ManualCaptureOptions } from './ManualCaptureOptions.js'
 export type HandleWrappers = {
   onHandle: (handle?: Handle) => Handle
   onError: Captured<HandleServerError>,
-  manualCaptureEvent: (options: ManualCaptureOptions) => void
+  manualCaptureEvent?: (options: ManualCaptureOptions) => void
 }
