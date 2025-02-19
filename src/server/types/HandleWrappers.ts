@@ -5,5 +5,5 @@ import { initSentry } from '../initSentry.js'
 export type HandleWrappers = {
   onHandle: (handle?: Handle) => Handle
   onError: Captured<HandleServerError>,
-  getSentry: (event: RequestEvent) => ReturnType<typeof initSentry>
+  getSentry?: (event: RequestEvent) => ReturnType<typeof initSentry>
 }
