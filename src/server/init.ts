@@ -37,8 +37,13 @@ export const init = (
   const onHandle = (handle?: Handle) =>
     handle ? sequence(sentryHandle, handle) : sentryHandle
 
-  const onError: Captured<HandleServerError> = (handleError = defaultErrorHandler, hints?: Omit<EventHint, "captureContext">) =>
-    (input) => {
+  const onError: Captured<HandleServerError> = (handleError = defaultErrorHandler) => {
+    const handleErrorWithSentry = (input: {
+      error: unknown;
+      event: RequestEvent;
+      status: number;
+      message: string;
+    }, hints?: Omit<EventHint, "captureContext">) => {
       if (isNotFoundError(input)) {
         return handleError(input)
       }
@@ -49,6 +54,9 @@ export const init = (
 
       return handleError(input, result)
     }
+
+    return handleErrorWithSentry;
+  }
 
   return {
     onHandle,
