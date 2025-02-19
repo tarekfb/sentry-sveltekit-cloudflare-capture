@@ -8,7 +8,6 @@ import type { InitOptions } from './types/InitOptions.js'
 import { defaultErrorHandler } from './util/defaultErrorHandler.js'
 import { isNotFoundError } from './util/isNotFoundError.js'
 import { Toucan } from 'toucan-js'
-import { ManualCaptureOptions } from './types/ManualCaptureOptions.js'
 
 export const init = (
   /**
@@ -30,7 +29,7 @@ export const init = (
       ...toucanOptions
     })
 
-  const manualCaptureEvent = ({eventId, message, environment, error}: ManualCaptureOptions): void => {
+  const manualCaptureEvent = () => {
     const sentry = new Toucan({
       requestDataOptions: {
         allowedHeaders: [
@@ -47,10 +46,8 @@ export const init = (
         allowedSearchParams: /(.*)/
       },
     })
-    console.log(error);
     
-    sentry.captureEvent({ event_id: eventId, message, environment })
-
+    return sentry.captureEvent;
   }
 
   const sentryHandle: Handle = (input) => {
