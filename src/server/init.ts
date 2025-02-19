@@ -7,7 +7,7 @@ import type { HandleWrappers } from './types/HandleWrappers.js'
 import type { InitOptions } from './types/InitOptions.js'
 import { defaultErrorHandler } from './util/defaultErrorHandler.js'
 import { isNotFoundError } from './util/isNotFoundError.js'
-import { Toucan } from 'toucan-js'
+import { EventHint } from '@sentry/core'
 
 export const init = (
   /**
@@ -29,27 +29,6 @@ export const init = (
       ...toucanOptions
     })
 
-  const manualCaptureEvent = () => {
-    const sentry = new Toucan({
-      requestDataOptions: {
-        allowedHeaders: [
-          'user-agent',
-          'cf-challenge',
-          'accept-encoding',
-          'accept-language',
-          'cf-ray',
-          'content-length',
-          'content-type',
-          'x-real-ip',
-          'host'
-        ],
-        allowedSearchParams: /(.*)/
-      },
-    })
-    
-    return sentry.captureEvent;
-  }
-
   const sentryHandle: Handle = (input) => {
     const sentryHandleOption = { input, init, handleOptions }
     return instrumentHandle(sentryHandleOption)
@@ -58,23 +37,21 @@ export const init = (
   const onHandle = (handle?: Handle) =>
     handle ? sequence(sentryHandle, handle) : sentryHandle
 
-  const onError: Captured<HandleServerError> =
-    (handleError = defaultErrorHandler) =>
-      (input) => {
-        if (isNotFoundError(input)) {
-          return handleError(input)
-        }
-
-        const Sentry = init(input.event)
-
-        const result = Sentry.captureException(input.error)
-
-        return handleError(input, result)
+  const onError: Captured<HandleServerError> = (handleError = defaultErrorHandler, hints?: Omit<EventHint, "captureContext">) =>
+    (input) => {
+      if (isNotFoundError(input)) {
+        return handleError(input)
       }
+
+      const Sentry = init(input.event)
+
+      const result = Sentry.captureException(input.error, hints)
+
+      return handleError(input, result)
+    }
 
   return {
     onHandle,
     onError,
-    manualCaptureEvent,
   }
 }
