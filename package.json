@@ -1,6 +1,6 @@
 {
   "name": "sentry-sveltekit-cloudflare-capture",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "♟️ Unofficial Sentry Integration for SvelteKit Cloudflare Adapter - with manual event capture. Fork from @jill64/sentry-sveltekit-cloudflare",
   "type": "module",
   "main": "dist/index.js",
